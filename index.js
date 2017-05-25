@@ -3,25 +3,22 @@ var execSync = require( 'child_process' ).execSync,
 	loaderUtils = require( 'loader-utils' ),
 	tmp = require( 'tmp' );
 
+var macTts = require( './drivers/mac-tts' );
+
 module.exports = function ( source ) {
 	var callback = this.async();
 	var _this = this;
 
-	var tmpAiff = tmp.fileSync( {
-		postfix: '.tmp.aiff'
-	} );
+	var speechFile;
 
-	var command = 'say -o ' + tmpAiff.name,
-		options = { input: source };
-
-	execSync( command, options );
+	speechFile = macTts( source );
 
 	var tmpMp3 = tmp.fileSync( {
 		postfix: '.tmp.mp3'
 	} );
 
 	ffmpeg()
-		.input( tmpAiff.name )
+		.input( speechFile )
 		.audioCodec( 'libmp3lame' )
 		.save( tmpMp3.name )
 		.on( 'end', function () {

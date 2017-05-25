@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/tdukart/tts-loader#readme",
   "dependencies": {
+    "command-exists": "^1.2.2",
     "fluent-ffmpeg": "^2.1.2",
     "loader-utils": "^1.1.0",
     "tmp": "^0.0.31"
