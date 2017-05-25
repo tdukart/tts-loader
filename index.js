@@ -15,13 +15,13 @@ var convertToMp3 = require( './helpers/convertToMp3' ),
 	convertToOgg = require( './helpers/convertToOgg' ),
 	firstInSequence = require( './helpers/firstInSequence' );
 
-function tryTts( source, driversToTry, context ) {
-	return firstInSequence( driversToTry, function ( driverName ) {
+function tryTts( source, options, context ) {
+	return firstInSequence( options.drivers, function ( driverName ) {
 		if ( !drivers.hasOwnProperty( driverName ) ) {
 			context.emitWarning( 'TTS driver not recognized: ' + driverName );
 			return Promise.reject();
 		} else {
-			return drivers[ driverName ].run( source );
+			return drivers[ driverName ].run( source, options );
 		}
 	} );
 }
@@ -38,7 +38,7 @@ module.exports = function ( source ) {
 		loaderUtils.getOptions( _this )
 	);
 
-	tryTts( source, options.drivers, _this )
+	tryTts( source, options, _this )
 		.then( function ( speechFile ) {
 			var conversions = [
 				convertToOgg( speechFile ),
