@@ -4,17 +4,35 @@ var loaderUtils = require( 'loader-utils' ),
 	tmp = require( 'tmp' );
 
 // TTS drivers.
-var macTts = require( './drivers/mac-tts' );
+var drivers = {
+	google: require( './drivers/google-tts' ),
+	mac: require( './drivers/mac-tts' )
+};
 
 // Helpers.
 var convertToMp3 = require( './helpers/convertToMp3' ),
-	convertToOgg = require( './helpers/convertToOgg' );
+	convertToOgg = require( './helpers/convertToOgg' ),
+	firstInSequence = require( './helpers/firstInSequence' );
+
+function tryTts( source, driversToTry ) {
+	return firstInSequence( driversToTry, function ( driverName ) {
+		return drivers[ driverName ].run( source );
+	} );
+}
 
 module.exports = function ( source ) {
 	var callback = this.async();
 	var _this = this;
 
-	macTts.run( source )
+	var options = Object.assign(
+		{},
+		loaderUtils.getOptions( _this ),
+		{
+			drivers: [ 'mac', 'google' ]
+		}
+	);
+
+	tryTts( source, options.drivers )
 		.then( function ( speechFile ) {
 			var conversions = [
 				convertToOgg( speechFile ),
