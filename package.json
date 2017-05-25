@@ -1,0 +1,24 @@
+{
+  "name": "tts-loader",
+  "version": "0.0.0",
+  "description": "Webpack loader for text-to-speech",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/tdukart/tts-loader.git",
+  "author": "Todd Dukart",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdukart/tts-loader/issues"
+  },
+  "homepage": "https://github.com/tdukart/tts-loader#readme",
+  "dependencies": {
+    "loader-utils": "^1.1.0",
+    "tmp": "^0.0.31"
+  },
+  "os": [
+    "darwin"
+  ],
+  "private": true
+}
