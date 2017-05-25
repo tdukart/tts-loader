@@ -21,8 +21,5 @@
     "google-tts-api": "^0.0.1",
     "loader-utils": "^1.1.0",
     "tmp": "^0.0.31"
-  },
-  "os": [
-    "darwin"
-  ]
+  }
 }
