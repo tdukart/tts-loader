@@ -1,7 +1,7 @@
 var Promise = require( 'bluebird' );
 
 // Borrowed from https://www.abeautifulsite.net/executing-promises-in-sequence-and-stopping-at-the-first-resolved-promise.
-module.exports = function ( values, asyncFn ) {
+var firstInSequence = function ( values, asyncFn ) {
 	return new Promise( function ( resolve, reject ) {
 		// Are there any values to check?
 		if ( values.length === 0 ) {
@@ -20,3 +20,5 @@ module.exports = function ( values, asyncFn ) {
 		} );
 	} );
 };
+
+module.exports = firstInSequence;
