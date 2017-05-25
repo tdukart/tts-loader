@@ -26,10 +26,10 @@ module.exports = function ( source ) {
 
 	var options = Object.assign(
 		{},
-		loaderUtils.getOptions( _this ),
 		{
 			drivers: [ 'mac', 'google' ]
-		}
+		},
+		loaderUtils.getOptions( _this )
 	);
 
 	tryTts( source, options.drivers )
