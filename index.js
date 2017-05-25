@@ -1,20 +1,44 @@
 // Libraries.
 var loaderUtils = require( 'loader-utils' ),
 	path = require( 'path' ),
+	Promise = require( 'bluebird' ),
 	tmp = require( 'tmp' );
 
 // TTS drivers.
-var macTts = require( './drivers/mac-tts' );
+var drivers = {
+	google: require( './drivers/google-tts' ),
+	mac: require( './drivers/mac-tts' )
+};
 
 // Helpers.
 var convertToMp3 = require( './helpers/convertToMp3' ),
-	convertToOgg = require( './helpers/convertToOgg' );
+	convertToOgg = require( './helpers/convertToOgg' ),
+	firstInSequence = require( './helpers/firstInSequence' );
+
+function tryTts( source, driversToTry, context ) {
+	return firstInSequence( driversToTry, function ( driverName ) {
+		if ( !drivers.hasOwnProperty( driverName ) ) {
+			context.emitWarning( 'TTS driver not recognized: ' + driverName );
+			return Promise.reject();
+		} else {
+			return drivers[ driverName ].run( source );
+		}
+	} );
+}
 
 module.exports = function ( source ) {
 	var callback = this.async();
 	var _this = this;
 
-	macTts.run( source )
+	var options = Object.assign(
+		{},
+		{
+			drivers: [ 'mac', 'google' ]
+		},
+		loaderUtils.getOptions( _this )
+	);
+
+	tryTts( source, options.drivers, _this )
 		.then( function ( speechFile ) {
 			var conversions = [
 				convertToOgg( speechFile ),
