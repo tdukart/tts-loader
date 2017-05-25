@@ -2,7 +2,7 @@
 
 Very basic Webpack loader for text-to-speech.
 
-This loader uses macOS's text-to-speech functionality to generate an MP3 with the contents of a passed-in text file.
+This loader uses macOS's text-to-speech functionality to generate audio files with the contents of a passed-in text file.
 
 ## Requirements
 
@@ -22,12 +22,14 @@ Assuming you have a file called 'quickbrownfox.txt' with the text you wish to ha
 var quickBrownFox = require('tts-loader!quickbrownfox.txt');
 ```
 
-That will return an MP3 file path that can be used, for example, with [Howler](https://howlerjs.com):
+That will return a array of file paths that can be used, for example, with [Howler](https://howlerjs.com):
 
 ```javascript
-var foxHowl = new Howl({ src: [ quickBrownFox ] });
+var foxHowl = new Howl({ src: quickBrownFox });
 foxHowl.play();
 ```
+
+Currently, the loader outputs the result in MP3 and OGG format.
 
 ## License
 
