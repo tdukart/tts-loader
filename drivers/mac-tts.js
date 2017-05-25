@@ -1,21 +1,26 @@
 var childProcess = require( 'child_process' ),
-	commandExistsSync = require( 'command-exists' ).sync,
+	commandExists = require( 'command-exists' ),
+	Promise = require( 'bluebird' ),
 	tmp = require( 'tmp' );
 
 module.exports = {
-	test: function () {
-		return commandExistsSync( 'say' );
-	},
 	run: function ( source ) {
-		var tmpAiff = tmp.fileSync( {
-			postfix: '.tmp.aiff'
+		return commandExists( 'say' ).then( function () {
+			var makeTempFile = Promise.promisify( tmp.file, { multiArgs: true } ),
+				exec = Promise.promisify( childProcess.exec );
+			var tempFile = '';
+
+			return makeTempFile( {
+				postfix: '.tmp.aiff'
+			} ).then( function ( file ) {
+				tempFile = file.name;
+				var command = 'say -o ' + tempFile,
+					options = { input: source };
+
+				return exec( command, options );
+			} ).then( function () {
+				return tempFile;
+			} );
 		} );
-
-		var command = 'say -o ' + tmpAiff.name,
-			options = { input: source };
-
-		childProcess.execSync( command, options );
-
-		return tmpAiff.name;
 	}
 };

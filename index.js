@@ -1,28 +1,23 @@
-var execSync = require( 'child_process' ).execSync,
-	ffmpeg = require( 'fluent-ffmpeg' ),
-	loaderUtils = require( 'loader-utils' ),
+// Libraries.
+var loaderUtils = require( 'loader-utils' ),
 	tmp = require( 'tmp' );
 
+// TTS drivers.
 var macTts = require( './drivers/mac-tts' );
+
+// Helpers.
+var convertToMp3 = require( './helpers/convertToMp3' );
 
 module.exports = function ( source ) {
 	var callback = this.async();
 	var _this = this;
 
-	var speechFile;
-
-	speechFile = macTts( source );
-
-	var tmpMp3 = tmp.fileSync( {
-		postfix: '.tmp.mp3'
-	} );
-
-	ffmpeg()
-		.input( speechFile )
-		.audioCodec( 'libmp3lame' )
-		.save( tmpMp3.name )
-		.on( 'end', function () {
-			var outputStream = _this.fs.readFileSync( tmpMp3.name );
+	macTts.run( source )
+		.then( function ( speechFile ) {
+			return convertToMp3( speechFile );
+		} )
+		.then( function ( speechFile ) {
+			var outputStream = _this.fs.readFileSync( speechFile );
 
 			var fileName = loaderUtils.interpolateName(
 				_this, '[name].[hash].mp3', { content: outputStream }
