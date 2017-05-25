@@ -6,8 +6,8 @@ This loader uses macOS's text-to-speech functionality to generate an MP3 with th
 
 ## Requirements
 
-Since this uses functionality built into macOS (f/k/a OS X), a Mac is required. This was developed and tested on Sierra,
-but should work on any version of macOS or OS X.
+Since this uses functionality built into macOS (f/k/a OS X), a Mac is required. This was developed and tested on Sierra 
+10.12.5, but should work on any version of macOS or OS X.
 
 In addition to the standard Webpack requirements, ffmpeg is required. It's easiest installed with
 [Homebrew](https://brew.sh):
