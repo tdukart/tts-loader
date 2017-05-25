@@ -14,6 +14,21 @@ In addition to the standard Webpack requirements, ffmpeg is required. It's easie
 
 `brew install ffmpeg`
 
+## Example usage
+
+Assuming you have a file called 'quickbrownfox.txt' with the text you wish to have spoken:
+
+```javascript
+var quickBrownFox = require('tts-loader!quickbrownfox.txt');
+```
+
+That will return an MP3 file path that can be used, for example, with [Howler](https://howlerjs.com):
+
+```javascript
+var foxHowl = new Howl({ src: [ quickBrownFox ] });
+foxHowl.play();
+```
+
 ## License
 
 MIT license. See LICENSE.
