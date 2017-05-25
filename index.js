@@ -17,7 +17,7 @@ module.exports = function ( source ) {
 			return convertToMp3( speechFile );
 		} )
 		.then( function ( speechFile ) {
-			var outputStream = _this.fs.readFileSync( speechFile );
+			var outputStream = _this.fs.readFileSync( speechFile.name );
 
 			var fileName = loaderUtils.interpolateName(
 				_this, '[name].[hash].mp3', { content: outputStream }

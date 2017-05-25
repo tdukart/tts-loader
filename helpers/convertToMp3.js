@@ -13,7 +13,7 @@ module.exports = function ( inputFile ) {
 			.audioCodec( 'libmp3lame' )
 			.save( tmpMp3.name )
 			.on( 'end', function () {
-				resolve(tmpMp3);
+				resolve( tmpMp3 );
 			} );
 	} );
 }

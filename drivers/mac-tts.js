@@ -13,12 +13,11 @@ module.exports = {
 			return makeTempFile( {
 				postfix: '.tmp.aiff'
 			} ).then( function ( file ) {
-				tempFile = file.name;
+				tempFile = file[ 0 ];
 				var command = 'say -o ' + tempFile,
 					options = { input: source };
 
-				return exec( command, options );
-			} ).then( function () {
+				childProcess.execSync( command, options );
 				return tempFile;
 			} );
 		} );
