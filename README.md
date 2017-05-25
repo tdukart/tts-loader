@@ -31,6 +31,29 @@ foxHowl.play();
 
 Currently, the loader outputs the result in MP3 and OGG format.
 
+## Configuration
+
+For greater configuration, it's recommended that you use a special naming convention for your text files and use the
+Webpack config files.
+
+`macVoice`: A string to define which macOS voice to use. To get a list of the macOS voices on your system, run
+`say -v '?'` in Terminal. This defaults to the voice you have selected in your System Preferences.
+
+`drivers`: An array of drivers to attempt. This defaults to `['mac', 'google']`.
+
+### Sample configuration
+
+```javascript
+{
+    test: /\.speech\.txt$/,
+    loader: 'tts-loader',
+    query: {
+        drivers: ['google', 'mac'],
+        macVoice: 'Fiona'
+    }
+}
+```
+
 ## License
 
 MIT license. See LICENSE.

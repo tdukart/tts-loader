@@ -7,7 +7,7 @@ var childProcess = require( 'child_process' ),
 	tmp = require( 'tmp' );
 
 module.exports = {
-	run: function ( source ) {
+	run: function ( source, options ) {
 		var makeTempFile = Promise.promisify( tmp.file, { multiArgs: true } ),
 			writeFile = Promise.promisify( fs.writeFile );
 
