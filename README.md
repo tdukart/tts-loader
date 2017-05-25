@@ -2,17 +2,19 @@
 
 Very basic Webpack loader for text-to-speech.
 
-This loader uses macOS's text-to-speech functionality to generate audio files with the contents of a passed-in text file.
+This loader uses text-to-speech functionality to generate audio files with the contents of a passed-in text file.
 
 ## Requirements
 
-Since this uses functionality built into macOS (f/k/a OS X), a Mac is required. This was developed and tested on Sierra 
-10.12.5, but should work on any version of macOS or OS X.
+This loader currently supports macOS's built-in text-to-speech functionality (on Macs only) and Google's unofficially
+supported text-to-speech API.
 
-In addition to the standard Webpack requirements, ffmpeg is required. It's easiest installed with
+In addition to the standard Webpack requirements, ffmpeg is required. On a Mac, it's easiest installed with
 [Homebrew](https://brew.sh):
 
 `brew install ffmpeg`
+
+For other platforms, check out [ffmpeg's Downloads page](https://ffmpeg.org/download.html).
 
 ## Example usage
 
