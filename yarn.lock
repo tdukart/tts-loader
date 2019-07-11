@@ -218,9 +218,9 @@ get-stream@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
 
-google-tts-api@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/google-tts-api/-/google-tts-api-0.0.1.tgz#ad48c1657e389f92aa5e6cf3095179e5ad2aefee"
+google-tts-api@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/google-tts-api/-/google-tts-api-0.0.4.tgz#76c6b73de3703cdca5a2cd211bc77e3f95585fe0"
   dependencies:
     isomorphic-fetch "^2.2.1"
 

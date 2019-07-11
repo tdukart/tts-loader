@@ -18,7 +18,7 @@
     "command-exists": "^1.2.2",
     "download": "^6.2.0",
     "fluent-ffmpeg": "^2.1.2",
-    "google-tts-api": "^0.0.1",
+    "google-tts-api": "^0.0.4",
     "loader-utils": "^1.1.0",
     "tmp": "^0.0.31"
   }
