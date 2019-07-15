@@ -20,6 +20,6 @@
     "fluent-ffmpeg": "^2.1.2",
     "google-tts-api": "^0.0.4",
     "loader-utils": "^1.1.0",
-    "tmp": "^0.0.31"
+    "tmp": "^0.1.0"
   }
 }
